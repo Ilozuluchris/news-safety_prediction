@@ -101,4 +101,4 @@ ENV/
 .mypy_cache/
 
 */migrations/
-*.xml
+.idea/
