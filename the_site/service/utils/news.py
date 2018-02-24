@@ -4,6 +4,7 @@ Module for anything relating to news
 from collections import OrderedDict
 import logging
 
+
 import requests
 
 apiKey = 'cf20aa0d287d4f39bbaac6880c56522b'
