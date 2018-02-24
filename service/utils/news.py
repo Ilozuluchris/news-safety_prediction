@@ -3,11 +3,17 @@ Module for anything relating to news
 """
 from collections import OrderedDict
 import logging
+import os
 import shelve
+
+from django.conf import settings
 
 import requests
 
-with shelve.open('apikey') as key_file:
+key_dir = '/home/kris/Documents/REPOS/news-safety_prediction_of_a_country/service/utils/apikey'
+#key_dir = os.path.join(settings.BASE_DIR, 'service', 'utils','apikey')
+
+with shelve.open(key_dir) as key_file:
     apiKey = key_file['key']
 
 base_news_url= 'https://newsapi.org/v2/top-headlines?{}&apikey=' + apiKey
