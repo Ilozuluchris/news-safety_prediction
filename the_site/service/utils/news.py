@@ -3,11 +3,12 @@ Module for anything relating to news
 """
 from collections import OrderedDict
 import logging
-
+import shelve
 
 import requests
 
-apiKey = 'cf20aa0d287d4f39bbaac6880c56522b'
+with shelve.open('apikey') as key_file:
+    apiKey = key_file['key']
 
 base_news_url= 'https://newsapi.org/v2/top-headlines?{}&apikey=' + apiKey
 
