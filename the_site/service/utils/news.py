@@ -2,6 +2,7 @@
 Module for anything relating to news
 """
 from collections import OrderedDict
+import logging
 
 import requests
 
@@ -20,11 +21,14 @@ class NewsApiError(Exception):
 
 
 def get_news_for_country(country):
-    #todo split by spaces, title every word every and and of
+    if country.upper() == "USA":
+        country = "United States"
+    new_country = [letter if (letter == 'of' or  letter == 'and') else letter.title()  for  letter in country.split(" ")]
+    country = ' '.join(new_country)
     try:
         country_code = country_code_dict[country]
     except KeyError:
-        print("did not find ")
+        logging.error("Could not get country code for county {}".format(country))
         raise Exception("Could not get country code for county {}".format(country))
     news_for_country_url = base_news_url.format('country=' + country_code)
     response = requests.get(news_for_country_url).json()
@@ -65,13 +69,14 @@ def get_headline_news():
     try:
         headlines = response['articles']
     except KeyError:
+        logging.error("Something went wrong with the news api")
         raise NewsApiError("Something went wrong with the news api")
     headline_news = map(get_some_news_info, headlines)
     return list(headline_news)
 
 
 if __name__ == "__main__":
-    current_country_news = get_news_for_country('Nigeria')
+    current_country_news = get_news_for_country('USA')
     print("News for country")
     for news in current_country_news:
         print(news)
