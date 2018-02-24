@@ -20,6 +20,7 @@ class NewsApiError(Exception):
 
 
 def get_news_for_country(country):
+    #todo split by spaces, title every word every and and of
     try:
         country_code = country_code_dict[country]
     except KeyError:

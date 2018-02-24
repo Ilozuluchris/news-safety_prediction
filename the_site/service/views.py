@@ -10,6 +10,7 @@ from .utils.safety import get_country_safety_stats
 
 
 def country_info(country):
+    #todo index news and safety on separate threads
     country_info = {}
     country_info['name'] = country
     country_info['news'] = get_news_for_country(country)
