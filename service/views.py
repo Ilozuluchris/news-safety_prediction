@@ -43,7 +43,10 @@ class api(View):
 
 class web(View):
     def get(self, request, *args, **kwargs):
-        pass
+        country = self.kwargs.get('country')
+        context = country_info(country)
+        return render(request, "post_list.html", context)
+
 
 if __name__ == "__main__":
     nigeria ="nigeria"
