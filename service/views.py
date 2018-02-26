@@ -40,6 +40,11 @@ class api(View):
         country = self.kwargs.get('country')
         return JsonResponse(country_info(country))
 
+
+class web(View):
+    def get(self, request, *args, **kwargs):
+        pass
+
 if __name__ == "__main__":
     nigeria ="nigeria"
     print(timeit.timeit("country_info(nigeria)" ,number=2,globals=globals()))
