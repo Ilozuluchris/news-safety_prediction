@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Info for {{name}}</title>
+</head>
+<body>
+    {% if news %}
+        {% for headline in news %}
+        <p>{{headline[urlToNewsArticle]}}</p>
+         <p>{{headline[title]}}</p>
+         <p>{{headline[urlToImage]}}</p>
+         <p>{{headline[description]}}</p>
+        {% endfor %}
+    {% end if %}
+</body>
+</html>

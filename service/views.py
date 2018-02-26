@@ -44,11 +44,16 @@ class api(View):
 class web(View):
     def get(self, request, *args, **kwargs):
         country = self.kwargs.get('country')
-        context = country_info(country)
+        context = {
+         'name': country,
+        'news':  get_news_for_country(country),
+        'safety': get_country_safety_stats(country)
+
+        }
         return render(request, "post_list.html", context)
 
 
 if __name__ == "__main__":
     nigeria ="nigeria"
-    print(timeit.timeit("country_info(nigeria)" ,number=2,globals=globals()))
-    print(timeit.timeit("country_ju(nigeria)",number=2, globals=globals()))
+    print(timeit.timeit("country_info(nigeria)", number=2, globals=globals()))
+    print(timeit.timeit("country_ju(nigeria)", number=2, globals=globals()))
