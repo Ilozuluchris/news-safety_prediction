@@ -4,10 +4,7 @@ Module for anything relating to news
 import copy
 from collections import OrderedDict
 import logging
-import os
 import shelve
-
-from django.conf import settings
 
 import requests
 
@@ -77,8 +74,8 @@ def get_headline_news():
 
     :return: map object that contains 10 headlines
     """
-    # headline_url = base_news_url.format('sources=google-news')
-    headline_url = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=9937c06f52804ddc942947c141065ea6'
+    headline_url = base_news_url.format('sources=google-news')
+    # headline_url = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=9937c06f52804ddc942947c141065ea6'
     response = requests.get(headline_url).json()
     try:
         headlines = response['articles']
