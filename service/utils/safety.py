@@ -65,7 +65,7 @@ def human_attack_safety_status(country, no_of_countries=163):
     country_percentage = math.ceil((int(country_latest_index)/no_of_countries)*100)
     country_safety ={}
     country_safety['index']=country_latest_index
-    country_safety['status'] = safety_status_text(country_percentage)
+    country_safety['status'] = safety_status_text(int(country_percentage))
     return country_safety
 
 
