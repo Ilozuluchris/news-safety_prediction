@@ -1,6 +1,7 @@
 """
 Module for anything relating to news
 """
+import copy
 from collections import OrderedDict
 import logging
 import os
@@ -48,23 +49,6 @@ def get_news_for_country(country):
     country_news = map(get_some_news_info, news)
     return list(country_news)
 
-def valid_subsetting(headline_news, key):
-    """
-    Checks if value returned by seubsetting with key is not null
-    if it is returns valid output
-    :param headline_news: dictionary
-    :param key : str
-    :return: str
-    """
-    try:
-       res =  headline_news[key]
-       if res == 'null':
-           return
-       else:
-           return  res
-    except KeyError:
-        logging.warning("Key {key} doesnot exist in dictionary").format(key=key)
-        return
 
 def get_some_news_info(headline_news):
     """
@@ -75,10 +59,13 @@ def get_some_news_info(headline_news):
     """
     headline_news = headline_news
     real_news = dict()
-    real_news['title'] = valid_subsetting(headline_news, 'title')
-    real_news['description'] = valid_subsetting(headline_news, 'description')
-    real_news['urlToNewsArticle'] = valid_subsetting(headline_news, 'url')
-    real_news['image'] = valid_subsetting(headline_news, 'urlToImage')
+    real_news['title'] = headline_news['title']
+    real_news['description'] = headline_news['description']
+    real_news['urlToNewsArticle'] = headline_news['url']
+    real_news['image'] = headline_news['urlToImage']
+    for k,v in copy.deepcopy(real_news).items():
+        if v is None or 'null':
+            del real_news[k]
     return real_news
 
 
@@ -103,7 +90,7 @@ def get_headline_news():
 
 
 if __name__ == "__main__":
-    #current_country_news = get_news_for_country('USA')
+    # current_country_news = get_news_for_country('USA')
     print("News for country")
     headline = get_headline_news()
 
