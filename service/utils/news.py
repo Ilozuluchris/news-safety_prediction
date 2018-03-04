@@ -48,6 +48,23 @@ def get_news_for_country(country):
     country_news = map(get_some_news_info, news)
     return list(country_news)
 
+def valid_subsetting(headline_news, key):
+    """
+    Checks if value returned by seubsetting with key is not null
+    if it is returns valid output
+    :param headline_news: dictionary
+    :param key : str
+    :return: str
+    """
+    try:
+       res =  headline_news[key]
+       if res == 'null':
+           return
+       else:
+           return  res
+    except KeyError:
+        logging.warning("Key {key} doesnot exist in dictionary").format(key=key)
+        return
 
 def get_some_news_info(headline_news):
     """
@@ -56,11 +73,12 @@ def get_some_news_info(headline_news):
     :param headline_news: Dictionary to subset from
     :return: Dictionary of needed keys
     """
+    headline_news = headline_news
     real_news = dict()
-    real_news['title'] = headline_news['title']
-    real_news['description'] = headline_news['description']
-    real_news['urlToNewsArticle'] = headline_news['url']
-    real_news['urlToImage'] = headline_news['urlToImage']
+    real_news['title'] = valid_subsetting(headline_news, 'title')
+    real_news['description'] = valid_subsetting(headline_news, 'description')
+    real_news['urlToNewsArticle'] = valid_subsetting(headline_news, 'url')
+    real_news['image'] = valid_subsetting(headline_news, 'urlToImage')
     return real_news
 
 
@@ -72,7 +90,8 @@ def get_headline_news():
 
     :return: map object that contains 10 headlines
     """
-    headline_url = base_news_url.format('sources=google-news')
+    # headline_url = base_news_url.format('sources=google-news')
+    headline_url = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=9937c06f52804ddc942947c141065ea6'
     response = requests.get(headline_url).json()
     try:
         headlines = response['articles']
@@ -84,8 +103,13 @@ def get_headline_news():
 
 
 if __name__ == "__main__":
-    current_country_news = get_news_for_country('USA')
+    #current_country_news = get_news_for_country('USA')
     print("News for country")
-    for news in current_country_news:
+    headline = get_headline_news()
+
+    for news in headline:
         print(news)
         print("\n")
+    # for news in current_country_news:
+    #     print(news)
+    #     print("\n")
