@@ -13,11 +13,21 @@
 <body class="landing">
     {% if news %}
         {% for headline in news %}
-            <p>{{headline.urlToNewsArticle}}</p>
-            <p>{{headline.title}}</p>
-            <p>{{headline.image}}</p>
-            <p>{{headline.description}}</p>
-            <p> NEXT ITERATION </p>
+    <section id="banner" style="background-position: center -0.3px;">
+					<div class="content">
+						<div class="container">
+							<div class="row">
+                                <p>{{headline.urlToNewsArticle}}</p>
+                                <p>{{headline.title}}</p>
+                                <p>{{headline.image}}</p>
+                                <p>{{headline.description}}</p>
+                                <p> NEXT ITERATION </p>
+							</div>
+						</div>
+					</div>
+					<a href="#two" class="goto-next scrolly">Next</a>
+</section>
+
             <br>
         {% endfor %}
     {% endif %}
