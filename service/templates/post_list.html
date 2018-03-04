@@ -7,11 +7,11 @@
 <body>
     {% if news %}
         {% for headline in news %} <!--lastthoughts sort dictionary so it can be rendered consistently on the front end-->
-        <p>{{headline[urlToNewsArticle]}}</p>
-         <p>{{headline[title]}}</p>
-         <p>{{headline[urlToImage]}}</p>
-         <p>{{headline[description]}}</p>
+        <p>{{headline.urlToNewsArticle}}</p>
+         <p>{{headline.title}}</p>
+         <p>{{headline.image}}</p>
+         <p>{{headline.description}}</p>
         {% endfor %}
-    {% end if %}
+    {% endif %}
 </body>
 </html>
