@@ -1,12 +1,10 @@
 """
 Module for anything relating to news
 """
+import copy
 from collections import OrderedDict
 import logging
-import os
 import shelve
-
-from django.conf import settings
 
 import requests
 
@@ -56,11 +54,15 @@ def get_some_news_info(headline_news):
     :param headline_news: Dictionary to subset from
     :return: Dictionary of needed keys
     """
+    headline_news = headline_news
     real_news = dict()
     real_news['title'] = headline_news['title']
     real_news['description'] = headline_news['description']
     real_news['urlToNewsArticle'] = headline_news['url']
-    real_news['urlToImage'] = headline_news['urlToImage']
+    real_news['image'] = headline_news['urlToImage']
+    for k,v in copy.deepcopy(real_news).items():
+        if v is None:
+            del real_news[k]
     return real_news
 
 
@@ -73,6 +75,7 @@ def get_headline_news():
     :return: map object that contains 10 headlines
     """
     headline_url = base_news_url.format('sources=google-news')
+    # headline_url = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=9937c06f52804ddc942947c141065ea6'
     response = requests.get(headline_url).json()
     try:
         headlines = response['articles']
@@ -84,8 +87,13 @@ def get_headline_news():
 
 
 if __name__ == "__main__":
-    current_country_news = get_news_for_country('USA')
+    # current_country_news = get_news_for_country('USA')
     print("News for country")
-    for news in current_country_news:
+    headline = get_headline_news()
+
+    for news in headline:
         print(news)
         print("\n")
+    # for news in current_country_news:
+    #     print(news)
+    #     print("\n")
