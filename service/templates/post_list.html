@@ -2,16 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Info for {{name}}</title>
+    <title>Info for {{name|title}}</title>
 </head>
 <body>
     {% if news %}
-        {% for headline in news %} <!--lastthoughts sort dictionary so it can be rendered consistently on the front end-->
-        <p>{{headline.urlToNewsArticle}}</p>
-         <p>{{headline.title}}</p>
-         <p>{{headline.image}}</p>
-         <p>{{headline.description}}</p>
+        {% for headline in news %}
+            <p>{{headline.urlToNewsArticle}}</p>
+            <p>{{headline.title}}</p>
+            <p>{{headline.image}}</p>
+            <p>{{headline.description}}</p>
+            <p> NEXT ITERATION </p>
+            <br>
         {% endfor %}
+    {% endif %}
+    <br/>
+    {% if safety %}
+        <p> Safety details</p>
+        {% if safety.human_attack_safety %}
+            <p> Safety from human attacks :{{ safety.human_attack_safety.status }}</p>
+        {% endif %}
+        <br>
+        {% if safety.natural_disaster_safety %}
+            <p> Safety from natural disasters  {{ safety.natural_disaster_safety.status_text }}</p>
+        {% endif %}
     {% endif %}
 </body>
 </html>
