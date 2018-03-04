@@ -64,7 +64,7 @@ def get_some_news_info(headline_news):
     real_news['urlToNewsArticle'] = headline_news['url']
     real_news['image'] = headline_news['urlToImage']
     for k,v in copy.deepcopy(real_news).items():
-        if v is None or 'null':
+        if v is None:
             del real_news[k]
     return real_news
 
