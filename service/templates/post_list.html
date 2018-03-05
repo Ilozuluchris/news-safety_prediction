@@ -11,27 +11,27 @@
     <title>Info for {{name|title}}</title>
 </head>
 <body class="landing">
-    {% if news %}
         {% for headline in news %}
     <section id="banner" style="background-position: center -0.3px;">
 					<div class="content">
 						<div class="container">
 							<div class="row">
-                                <p>{{headline.urlToNewsArticle}}</p>
                                 <p>{{headline.title}}</p>
-                                <p>{{headline.image}}</p>
+                                <img src="{{headline.image}}"/>
                                 <p>{{headline.description}}</p>
+                                <a href="{{headline.urlToNewsArticle}}">Click to read more</a>
                                 <p> NEXT ITERATION </p>
 							</div>
 						</div>
 					</div>
 					<a href="#two" class="goto-next scrolly">Next</a>
 </section>
+        {% empty %}
+    <p>Sorry, no news found for {{name|title}}</p>
 
             <br>
         {% endfor %}
-    {% endif %}
-    <br/>
+        <br/>
     {% if safety %}
         <p> Safety details</p>
         {% if safety.human_attack_safety %}
