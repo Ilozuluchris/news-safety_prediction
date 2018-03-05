@@ -12,12 +12,14 @@
 </head>
 <body class="landing">
         {% for headline in news %}
-    <section id="banner" style="background-position: center -0.3px;">
+    <section id="one" class="spotlight style1 bottom" style="background-position: center -256.95px;">
 					<div class="content">
 						<div class="container">
 							<div class="row">
                                 <p>{{headline.title}}</p>
+                                {% if headline.image %}
                                 <img src="{{headline.image}}"/>
+                                {% endif %}
                                 <p>{{headline.description}}</p>
                                 <a href="{{headline.urlToNewsArticle}}">Click to read more</a>
                                 <p> NEXT ITERATION </p>
