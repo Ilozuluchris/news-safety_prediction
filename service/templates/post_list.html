@@ -27,7 +27,10 @@
 							</div>
 						</div>
 					</div>
+                    <!-- Ensuring the last article does not have a next button-->
+                    {% if i < news|length|add:"-1" %}
 					<a href="#{{i|add:'1'}}" class="goto-next scrolly">Next</a>
+                    {% endif %}
 </section>
         {% empty %}
     <p>Sorry, no news found for {{name|title}}</p>
