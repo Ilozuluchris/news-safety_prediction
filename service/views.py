@@ -39,10 +39,18 @@ class api(View):
     def get(self, request,*args, **kwargs):
         country = self.kwargs.get('country')
         return JsonResponse(country_info(country))
-
+from django.http import HttpResponseRedirect,HttpResponse
+class index(View):
+  def get(self, request, *args, **kwargs):
+      countries_list = ['a','b']
+      context = {
+                'countries_list': countries_list
+      }
+      return render(request,'index.html', context)
 
 class web(View):
     def get(self, request, *args, **kwargs):
+        print(request)
         country = self.kwargs.get('country')
         # context = {
         #  'name': country,
