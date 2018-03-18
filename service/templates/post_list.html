@@ -13,7 +13,7 @@
     <title>Info for {{name|title}}</title>
 </head>
 <body class="landing">
-        {% for i,headline in news|my_enum %}
+    {% for i,headline in news|my_enum %}
     <section id="{{i}}" class="spotlight style1 bottom" style="">
 					<div class="content">
 						<div class="container">
@@ -39,28 +39,29 @@
                     {% if i < news|length|add:"-1" %}
 					<a href="#{{i|add:'1'}}" class="goto-next scrolly">Next</a>
                     {% endif %}
-</section>
-        {% empty %}
+    </section>
+    {% empty %}
     <p>Sorry, no news found for {{name|title}}</p>
-
-            <br>
-        {% endfor %}
+    {% endfor %}
         <br/>
     {% if safety %}
-        <div class="container">
-            <div class="row">
-                <section class="style1  bottom">
-                    <h4> Safety details</h4>
-                {% if safety.human_attack_safety %}
-                    <p> Safety from human attacks :{{ safety.human_attack_safety.status }}</p>
-                {% endif %}
-                <br>
-                {% if safety.natural_disaster_safety %}
-                    <p> Safety from natural disasters  {{ safety.natural_disaster_safety.status_text }}</p>
-                {% endif %}
-                </section>
-            </div>
-        </div>
+            <section id="" class="spotlight style1 bottom" style="">
+                <div class="content">
+                    <div class="container">
+                        <div class="col-sm-12">
+                            <h1> Safety details</h1>
+                            {% if safety.human_attack_safety %}
+                            <p> Safety from human attacks :{{ safety.human_attack_safety.status }}</p>
+                            {% endif %}
+                            <br>
+                            {% if safety.natural_disaster_safety %}
+                            <p> Safety from natural disasters  {{ safety.natural_disaster_safety.status_text }}</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </section>
 
     {% endif %}
     <!-- Scripts -->
