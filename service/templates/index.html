@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load service_tags %}
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!--[if lte IE 8]><script src="{% static 'js/ie/html5shiv.js' %}" ></script><![endif]-->
+    <link rel="stylesheet" href="../static/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="{% static 'css/ie9.css' %}" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="{% static 'css/ie8.css' %}" /><![endif]-->
+    <title>Get News And Safety Prediction Of A country</title>
+</head>
+<body class="">
+    <div class="container">
+        <div>
+            <div style="padding-top: 30%">
+                <form  method="get" onsubmit="get_details()" name="country_form" id="country_form">
+                    <div class="form-group">
+                         <label for="country_select">Example select</label>
+                        <select class="form-control" id="country_select" required>
+                          <option value="" name="country">Select Country</option>
+                            {% for country in countries_list %}
+                                <option value="{{country}}" name="country">{{country}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-primary"  type="submit" value="" name="">GET &ensp;DETAILS</button>
+                </form>
+            </div>
+        </div>
+    </div>
+     <script src="{% static 'js/jquery.min.js' %}"></script>
+ <script>
+        function get_details() {
+            var country = $( "select option:selected" ).text();
+         $('#country_form').attr('action','/'+country);
+        }
+    </script>
+</body>
+</html>
