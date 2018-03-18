@@ -76,6 +76,7 @@ def natural_disaster_safety_status(country):
         :type country: str
     :return: Dict containing status for country or None(If status could not be determined)
     """
+    print(country+"in natural")
     res = requests.get(world_risk_url)
     website = BeautifulSoup(res.text, 'html.parser',parse_only=SoupStrainer('table'))
     country_a_element = website.find('a',text=country)

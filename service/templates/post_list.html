@@ -13,6 +13,7 @@
     <title>Info for {{name|title}}</title>
 </head>
 <body class="landing">
+    {% if news %}
     {% for i,headline in news|my_enum %}
     <section id="{{i}}" class="spotlight style1 bottom" style="">
 					<div class="content">
@@ -41,6 +42,7 @@
     <p>Sorry, no news found for {{name|title}}</p>
     {% endfor %}
         <br/>
+    {% endif %}
     {% if safety %}
             <section id="" class="spotlight style1 bottom" style="">
                 <div class="content">

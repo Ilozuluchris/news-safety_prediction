@@ -27,22 +27,26 @@ class NewsApiError(Exception):
 
 
 def get_news_for_country(country):
-    if country.upper() == "USA":
-        country = "United States"
-    new_country = [letter if (letter == 'of' or  letter == 'and') else letter.title()  for  letter in country.split(" ")]
-    country = ' '.join(new_country)
+    # if country.upper() == "USA":
+    #     country = "United States"
+    # new_country = [letter if (letter == 'of' or  letter == 'and') else letter.title()  for  letter in country.split(" ")]
+    # country = ' '.join(new_country)
     try:
         country_code = country_code_dict[country]
     except KeyError:
         logging.error("Could not get country code for county {}".format(country))
-        raise Exception("Could not get country code for county {}".format(country))
+        #raise Exception("Could not get country code for county {}".format(country))
+        return None
     news_for_country_url = base_news_url.format('country=' + country_code)
     response = requests.get(news_for_country_url).json()
     try:
         news = response['articles']
     except KeyError:
-        raise NewsApiError("Something went wrong with the news api, "
-                           "could not get news for country with code {}".format(country_code))
+        logging.error("Something went wrong with the news api,"
+                      "could not get news for country with code {}".format(country_code))
+        return None
+        #raise NewsApiError("Something went wrong with the news api, "
+                          # "could not get news for country with code {}".format(country_code))
     country_news = map(get_some_news_info, news)
     return list(country_news)
 
