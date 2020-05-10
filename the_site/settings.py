@@ -23,9 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9*e+paw*pi(70_!+*%*ndntju)db!$1#+bt23vcvfl%mh3ux3m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+#todo: change to false for production
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["news-safety-prediction.herokuapp.com", '127.0.0.1']
 
 
 # Application definition
